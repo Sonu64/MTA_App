@@ -1,0 +1,10 @@
+➡️ Activate Virtual Environment in Powershell
+. .\.venv\Scripts\Activate.ps1
+--> Check interprter path ✅
+
+
+# For Authentication & Custom User logic
+python manage.py startapp auth
+# For the Medical Logic (Patients, Assignments, Vitals) 
+python manage.py startapp clinical
+
