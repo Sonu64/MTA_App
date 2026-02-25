@@ -15,8 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.views.generic import RedirectView
+from allauth.account.views import SignupView
 
 urlpatterns = [
+    # 1. Staff Access
     path('admin/', admin.site.urls),
+    # 2. The Landing Page (Direct Signup)
+    path('', SignupView.as_view(), name='account_signup'),
+    # 3. Medical App Logic
+    path('clinical/', include('clinical.urls')),
+    # 4. User Profile/Custom User Logic
+    path('users/', include('users.urls')),
+    # 5. AllAuth Authentication (Essential for AllAuth to work)
+    path('accounts/', include('allauth.urls')),
+    # 6. Redirect standard AllAuth signup to your root signup
+    path('accounts/signup/', RedirectView.as_view(url="/")),
 ]
